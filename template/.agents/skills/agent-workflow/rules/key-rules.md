@@ -1,7 +1,6 @@
 # Agent Workflow — Key Rules
 
 - Lifecycle is Understand → Plan → Implement → Verify → Summarize; ask if ambiguous before Plan.
-- Use `scout` + `context-awareness` + `vision-compact.md` before any Plan/Implement.
 - Handoffs pass compact state (Task/Kind/Vision/Spec/Files/Gates), not full history.
 - Order by impact-to-effort then dependency chain; state order upfront; parallelize independent slices, sequence dependent ones.
 - Batch `Read` calls in one turn; launch independent subagents in parallel in one turn.

@@ -9,7 +9,7 @@ Build reactive frontends without leaving Go. This skill covers `framework/runtim
 
 ## 1. Detect the context
 
-- Read `internal/docs/project-vision.md` and `internal/docs/specs/framework/KWF-WASM-T4X9P-wasm-client-runtime.md`.
+- Read `docs/project-vision.md` and `docs/specs/framework/KWF-WASM-T4X9P-wasm-client-runtime.md`.
 - Confirm the project kind: `site`/`app` projects use islands; check `web/ssg` for `client:load`/`idle`/`visible` markers.
 - Identify whether the task is **build pipeline**, **VDOM**, **component/hooks**, **hydration**, **widgets**, or **theming**.
 

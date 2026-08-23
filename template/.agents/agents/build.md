@@ -19,7 +19,7 @@ Working rules:
 
 **Orchestration (unified vision):**
 - Delegate slice ownership: `runtime` for WASM/VDOM/islands/widgets, `infra` for provider/state/plan, `service` for registry/gateway/resilience/tracing/messaging, `worker` for queues/cron/DLQ. You own integration and `krewire` command dispatch.
-- Read `internal/docs/project-vision.md` and the relevant `KWF-*` spec before planning; list which specs you implement.
-- Optimize for parallel execution: independent slices (e.g., `runtime` build + `infra` plan) run via parallel subagents; shared context via `internal/docs/specs/` not re-read per agent.
+- Read `docs/project-vision.md` and the relevant `KWF-*` spec before planning; list which specs you implement.
+- Optimize for parallel execution: independent slices (e.g., `runtime` build + `infra` plan) run via parallel subagents; shared context via `docs/specs/` not re-read per agent.
 
 Report at the end: what changed, why, which specs (KWF-*) were implemented, and how it was verified. Be concise and clear.

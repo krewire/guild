@@ -16,8 +16,7 @@ Understand → Plan → Implement → Verify → Summarize
 ```
 
 - **Understand:** `context-awareness` + `scout` (kind/workflow/layout). Never assume.
-- **Plan:** `plan` agent or `spec-writing` skill for non-trivial tasks; read `internal/docs/project-vision.md` and relevant `KWF-*` spec.
-- **Implement:** `build` (primary) delegates slices to `runtime`/`infra`/`service`/`worker`; uses `vision-compact.md` for context.
+- **Plan:** `plan` agent or `spec-writing` skill for non-trivial tasks; read `docs/project-vision.md` and relevant `KWF-*` spec.
 - **Verify:** `tester` + `quality-gate` (per-kind gates) + `reviewer`/`security` before merge.
 - **Summarize:** What changed, why, how verified (real commands, not claims).
 
@@ -56,7 +55,6 @@ Files: <touched paths>
 Gates: <which gates to run>
 ```
 
-- **Do not** paste full `project-vision.md` or `AGENTS.md` to subagents — use `vision-compact.md`.
 - **Do** include spec ID and requirement row (`FRK-*`) for traceability.
 
 ## 4. Parallel vs Sequential

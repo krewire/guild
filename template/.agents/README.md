@@ -7,7 +7,7 @@ the `.agents/` convention (OpenCode, Claude Code, Cursor, etc.).
 .agents/
 ├── agents/                # Agents & subagents (Markdown + YAML frontmatter)
 │   ├── build.md           # Primary orchestrator — delegates slices
-│   ├── plan.md            # Vision-aware planner (internal/docs/project-vision.md)
+│   ├── plan.md            # Vision-aware planner (docs/project-vision.md)
 │   ├── orchestrator.md    # Vision-aware router & parallelizer
 │   ├── scout.md           # 8-kind detector (app/cli/site/book/worker/service/infra/kernel)
 │   ├── reviewer.md        # Vision-aware reviewer (SSR parity, secrets, opt-in cost)
@@ -60,7 +60,6 @@ the `.agents/` convention (OpenCode, Claude Code, Cursor, etc.).
 │   ├── worker-queue/      # Job queues/cron/DLQ (KWF-L5H2F)
 │   └── agent-optimization/ # Context compaction & parallel orchestration
 └── context/
-    └── vision-compact.md  # 5-line workload matrix — fast-load for subagents
 ```
 
 ## File Format

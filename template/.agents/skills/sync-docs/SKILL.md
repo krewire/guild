@@ -9,8 +9,8 @@ Keep every Krewire document consistent with the single source of truth.
 
 ## 1. Source of truth hierarchy
 
-1. `internal/docs/project-vision.md` — 9-workload matrix, roadmap, architecture diagram
-2. `internal/docs/specs/index.md` — 51 specs, Spec vs Impl Status
+1. `docs/project-vision.md` — 9-workload matrix, roadmap, architecture diagram
+2. `docs/specs/index.md` — 51 specs, Spec vs Impl Status
 3. `libs/core/workload.go` — `core.Kind`/`Workloads` (canonical code)
 4. Per-repo `docs/architecture.md` / `docs/philosophy.md` / `docs/index.md`
 5. `README.md` per repo + `docs/manuscript/` (narrative)
@@ -25,10 +25,9 @@ Changes flow top-down: vision → specs → `core` → `docs/architecture` → `
 | Workload matrix | `README.md` vs `project-vision.md` vs `core.Workloads` | `README` still shows `framework/cli` not `framework/tui` |
 | Architecture tree | `framework/docs/architecture.md` vs `libs/docs/architecture.md` vs `project-vision.md` | `framework` tree missing `kern/` or still shows `cli/` not `tui/` |
 | Philosophy | `*/docs/philosophy.md` vs `project-vision.md` Principles | Missing `core` declarative + `kern` imperative control plane |
-| Spec location | `<project>/docs/specs/` vs `internal/docs/specs/<project>/` | Original contains specs not `MOVED.md` |
+| Spec location | `<project>/docs/specs/` vs `docs/specs/` | Original contains specs not `MOVED.md` |
 | Package name | `framework/tui` imports vs docs | Docs still say `framework/cli` or `cli.NewApp` not `tui.NewApp` |
 | Manuscript | `docs/manuscript/01-introduction.md` vs vision | Still says meta-framework, not unified 9-workload |
-| Vision-compact | `.agents/context/vision-compact.md` vs `project-vision.md` | 5-line matrix outdated |
 
 ## 3. Workflow
 
@@ -38,13 +37,12 @@ Changes flow top-down: vision → specs → `core` → `docs/architecture` → `
 
 Example fix order:
 ```
-project-vision.md → core/workload.go → framework/docs/architecture.md → README.md → manuscript/ → AGENTS.md → vision-compact.md
 ```
 
 ## 4. Gates
 
 - `sync-docs` subagent must report `In-sync` before `reviewer` approves docs PRs.
-- `internal/docs/specs/index.md` Impl Status must match `core.Workloads` Status (`Shipped` vs `Planned`).
+- `docs/specs/index.md` Impl Status must match `core.Workloads` Status (`Shipped` vs `Planned`).
 
 ## Rules
 

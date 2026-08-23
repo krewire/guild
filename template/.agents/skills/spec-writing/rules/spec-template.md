@@ -1,8 +1,8 @@
 # Specification Template — Global Industry Standard (Krewire Adaptation)
 
-> Copy this template to `internal/docs/specs/<project>/` as `{ProjectId}-{Scope}-{SpecID}-{slug}.md`.
+> Copy this template to `docs/specs/` as `{ProjectId}-{Scope}-{SpecID}-{slug}.md`.
 > SpecID is a unique random 5-character alphanumeric code (e.g., `K1N2Q`). Never reuse or sequence.
-> See `internal/docs/specs/index.md` for the implementation matrix and `internal/docs/project-vision.md` for workload context.
+> See `docs/specs/index.md` for the implementation matrix and `docs/project-vision.md` for workload context.
 
 File name: `{ProjectId}-{Scope}-{SpecID}-{slug}.md`
 
@@ -34,7 +34,7 @@ What exists today and why change is needed. Ground in reality:
 
 - Current architecture, files, and constraints (cite `path/file.go:line` or commit)
 - Past decisions and their consequences
-- Link to `internal/docs/project-vision.md` and related specs (`KWL-*`/`KWF-*`)
+- Link to `docs/project-vision.md` and related specs (`KWL-*`/`KWF-*`)
 
 ## 3. Problem Statement
 
@@ -68,8 +68,8 @@ Concrete, verifiable problem this spec solves. Use measurable language.
 
 | Term | Definition | Source |
 |------|------------|--------|
-| Workload | One cell of the 9-workload matrix (cli, worker, infra, etc.) | `internal/docs/project-vision.md` |
-| SpecID | Random 5-char code in `{ProjectId}-{Scope}-{SpecID}-{slug}.md` | `internal/docs/specs/index.md` |
+| Workload | One cell of the 9-workload matrix (cli, worker, infra, etc.) | `docs/project-vision.md` |
+| SpecID | Random 5-char code in `{ProjectId}-{Scope}-{SpecID}-{slug}.md` | `docs/specs/index.md` |
 | Control Plane | `libs/core` (declarative) + `libs/kern` (imperative) | `KWL-K1N2Q` / `KWL-KERN-X8P3L` |
 
 ## 5. Requirements
@@ -149,8 +149,8 @@ libs/core (Kind/Workload) ← libs/kern (Kernel/Module) ← framework/* ← krew
 
 ## 7. Dependencies & Impact
 
-- **Depends On:** Specs that must land first (see `internal/docs/specs/index.md` Depends On column)
-- **Impacts:** Repos, packages, and docs that this spec touches (e.g., `libs/core`, `libs/kern`, `AGENTS.md`, `internal/docs/project-vision.md`)
+- **Depends On:** Specs that must land first (see `docs/specs/index.md` Depends On column)
+- **Impacts:** Repos, packages, and docs that this spec touches (e.g., `libs/core`, `libs/kern`, `AGENTS.md`, `docs/project-vision.md`)
 - **Migration:** Steps to adopt, backward-compatibility, or `MOVED.md` redirects if moving files
 
 ## 8. Risks & Mitigations
@@ -158,7 +158,7 @@ libs/core (Kind/Workload) ← libs/kern (Kernel/Module) ← framework/* ← krew
 | Risk | Impact | Mitigation |
 |------|--------|------------|
 | Circular dependency if `core` imports `framework` | High | `core` stays stdlib-only; `kern` depends only on `core` |
-| SpecID collision | Medium | Random 5-char, check `internal/docs/specs/index.md` |
+| SpecID collision | Medium | Random 5-char, check `docs/specs/index.md` |
 
 ## 9. Testing & Verification Plan
 
@@ -169,8 +169,8 @@ libs/core (Kind/Workload) ← libs/kern (Kernel/Module) ← framework/* ← krew
 
 ## 10. Rollout & Operations
 
-- **Phase:** Which roadmap phase (see `internal/docs/project-vision.md` Phases 0-5) — sorted by impact-to-effort then dependency
-- **Rollout steps:** Spec → implementation → `gofmt`/`go vet`/`go test` → `push`+`tag` → propagate `go.mod` downstream → rebuild `bin/krewire` → `internal/docs/specs/index.md` Impl Status `Planned` → `Shipped`
+- **Phase:** Which roadmap phase (see `docs/project-vision.md` Phases 0-5) — sorted by impact-to-effort then dependency
+- **Rollout steps:** Spec → implementation → `gofmt`/`go vet`/`go test` → `push`+`tag` → propagate `go.mod` downstream → rebuild `bin/krewire` → `docs/specs/index.md` Impl Status `Planned` → `Shipped`
 - **Timeline:** `Week 1: spec review` → `Week 2: implementation` → `Week 3: gates + docs sync` (or `XS`/`S`/`M` estimate)
 - **Monitoring:** Logs, metrics, or health checks if runtime behavior changes
 - **Rollback:** How to revert (`git revert`, feature flag)
@@ -186,7 +186,7 @@ libs/core (Kind/Workload) ← libs/kern (Kernel/Module) ← framework/* ← krew
 
 - S1 — Verifiable outcome (e.g., `go doc github.com/krewire/libs/core` lists `Kind` with examples)
 - S2 — Downstream `framework`/`krewire` can import new API without `go vet` failures
-- S3 — `internal/docs/specs/index.md` updated with correct `Impl Status`
+- S3 — `docs/specs/index.md` updated with correct `Impl Status`
 
 ## 13. Related Specifications
 
@@ -199,8 +199,8 @@ Cross-repo links use `../<project>/` or full GitHub URL to `krewire/internal` ma
 
 ## 14. References
 
-- `internal/docs/project-vision.md` — unified workload matrix
-- `internal/docs/specs/index.md` — implementation matrix (Spec vs Impl Status)
+- `docs/project-vision.md` — unified workload matrix
+- `docs/specs/index.md` — implementation matrix (Spec vs Impl Status)
 - Code: `libs/core/core.go`, `libs/kern/kern.go`
 - Version: `libs/core/version.go` (`core.Version`, `core.CheckEcosystemCompatibility`)
 - External: RFC 2119 (MUST/SHOULD), IEEE 830 / IEEE 1016, ISO/IEC 25010, ADR template, Google Design Doc format, semver.org
@@ -211,8 +211,7 @@ Cross-repo links use `../<project>/` or full GitHub URL to `krewire/internal` ma
 
 ```yaml
 context:
-  - load: .agents/context/vision-compact.md  # 5-line matrix
-  - load: internal/docs/specs/index.md       # check Depends On, Spec vs Impl
+  - load: docs/specs/index.md       # check Depends On, Spec vs Impl
   - load: specific KWF-*/KWL-* spec for this workload only (lazy)
 routing:
   - workload == "core" → skill: arch-guard, agent: reviewer
@@ -235,6 +234,6 @@ gates: ["gofmt -l .", "go vet ./...", "go test ./...", "arch-guard Pass", "sync-
 - [ ] SpecID is random 5-char, unique, not sequenced; file name follows `{ProjectId}-{Scope}-{SpecID}-{slug}.md`
 - [ ] Metadata table complete, no `Version` field; `Date` is creation date
 - [ ] Every `Must` requirement has an ID and will trace to implementation + test
-- [ ] `internal/docs/specs/index.md` and per-project `index.md` updated
+- [ ] `docs/specs/index.md` and per-project `index.md` updated
 - [ ] Alternatives and Risks sections filled (not left empty)
 - [ ] Verification plan lists real commands (`gofmt`, `go vet`, `go test`, per-kind gate)

@@ -22,7 +22,7 @@ Feature | Bug | Task | Spec | Architecture Guard
 `framework/tui` | `framework/web` | `framework/runtime` | `framework/worker` | `framework/service` | `framework/infra` | `libs/core` | `libs/kern` | `krewire` | `guild` | `docs` | `internal`
 
 ## Context
-Why this matters now. Link `internal/docs/project-vision.md` and relevant spec file:line (e.g., `internal/docs/specs/libs/KWL-K1N2Q-core-business-rules.md:45`).
+Why this matters now. Link `docs/project-vision.md` and relevant spec file:line (e.g., `docs/specs/libs/KWL-K1N2Q-core-business-rules.md:45`).
 
 ## Problem Statement
 Concrete problem, with file:line or repro steps. For bugs, include expected vs actual and `core.ExitCode` if relevant.
@@ -37,9 +37,9 @@ What should change. For features, list ordered steps small and verifiable. For s
 - [ ] No `go.work`, no committed `replace` directives
 
 ## References
-- Spec: `internal/docs/specs/...`
+- Spec: `docs/specs/...`
 - Related issue/PR: #...
-- Vision: `internal/docs/project-vision.md`
+- Vision: `docs/project-vision.md`
 
 ## Labels (suggested)
 `kind/<workload>`, `area/<repo>`, `priority/<P0-P3>`, `spec/<SpecID>` if applicable
@@ -49,7 +49,7 @@ What should change. For features, list ordered steps small and verifiable. For s
 
 1. One issue per initiative — never one issue for several unrelated changes (same as spec-per-initiative).
 2. Title uses Conventional Commits `type(scope): summary` and is searchable.
-3. Context links to vision and spec; never invent architecture — cite `AGENTS.md` or `internal/docs/specs/index.md`.
+3. Context links to vision and spec; never invent architecture — cite `AGENTS.md` or `docs/specs/index.md`.
 4. Acceptance criteria are binary and verifiable; include the exact gates to run.
 5. For `arch-guard` findings, create `type: Architecture Guard` issues with `file:line` violations.
 6. For `sync-docs` drift, create `type: Task` with checklist per repo.

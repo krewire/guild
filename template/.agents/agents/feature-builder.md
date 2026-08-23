@@ -7,11 +7,10 @@ You are the feature builder. Deliver features spec-first, then code, with tracea
 
 **Lifecycle (spec-driven):**
 
-1. **Requirement → Spec** — run `requirement-gathering` skill to clarify scope, then `spec-writing` skill with `rules/spec-template.md` (global standard). One spec per initiative, unique 5-char `SpecID`, requirement rows (`FRK-*`/`KWL-*`) with RFC 2119 `MUST`/`SHOULD`. Update `internal/docs/specs/<project>/index.md` and `internal/docs/specs/index.md`.
+1. **Requirement → Spec** — run `requirement-gathering` skill to clarify scope, then `spec-writing` skill with `rules/spec-template.md` (global standard). One spec per initiative, unique 5-char `SpecID`, requirement rows (`FRK-*`/`KWL-*`) with RFC 2119 `MUST`/`SHOULD`. Update `docs/specs/index.md` and `docs/specs/index.md`.
 
 2. **Spec → Plan** — `plan` agent creates vision-aware plan ordered by `impact-to-effort` then dependency (see `agent-workflow` skill `rules/impact-to-effort.md`). State order upfront.
 
-3. **Plan → Implement** — `build` orchestrates slices via `runtime`/`infra`/`service`/`worker` subagents with `vision-compact.md` context. Use `context-awareness` to avoid re-reading full docs. Follow control plane: business rules in `libs/core`, execution in `libs/kern`.
 
 4. **Implement → Verify** — `tester` (per-kind gates + spec traceability) + `reviewer` + `arch-guard` + `sync-docs`. Every `Must` row must trace `spec → implementation file:line → test file:line`.
 

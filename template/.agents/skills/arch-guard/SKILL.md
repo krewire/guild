@@ -9,8 +9,8 @@ Prevent architectural drift before it ships. This skill enforces the control pla
 
 ## 1. Load the control plane
 
-- Read `internal/docs/project-vision.md` (workload matrix) + `libs/core/workload.go` (`core.Kind`, `core.Workloads`) + `libs/kern/kern.go` (`Kernel`, `Module`, `Registry`).
-- Check `internal/docs/specs/index.md` for `Spec vs Impl Status` — planned specs must not be imported as code.
+- Read `docs/project-vision.md` (workload matrix) + `libs/core/workload.go` (`core.Kind`, `core.Workloads`) + `libs/kern/kern.go` (`Kernel`, `Module`, `Registry`).
+- Check `docs/specs/index.md` for `Spec vs Impl Status` — planned specs must not be imported as code.
 - Remember: `libs/core` is declarative (what is valid, stdlib-only); `libs/kern` is imperative (how it runs, stdlib + `core`). See `KWL-K1N2Q`, `KWL-KERN-X8P3L`, `KWF-M8K2Q`.
 
 ## 2. Run the 7 guard checks
@@ -19,8 +19,8 @@ Prevent architectural drift before it ships. This skill enforces the control pla
 |---|-------|------|---------|
 | 1 | Workload integrity | `core.ParseKind`, `core.WorkloadFor` | Unknown `project.kind` must return `core.ExitCodeUsage` |
 | 2 | Control plane boundaries | `go list -f '{{.Imports}}' ./...` | `libs/core` imports `framework`/`krewire` → blocker; `libs/kern` imports `framework` → blocker |
-| 3 | Framework package boundaries | `grep -r framework/` vs `internal/docs/specs/index.md` | `framework/app` importing `service`/`infra` without `service`/`infra` kind → opt-in violation (`core.IsOptIn`) |
-| 4 | Spec traceability | `ls internal/docs/specs/<project>/` vs `docs/specs/` | New feature without spec in `internal/docs/specs/<project>/` + requirement row (`FRK-*`) → blocker; original `docs/specs/` contains specs not `MOVED.md` → blocker |
+| 3 | Framework package boundaries | `grep -r framework/` vs `docs/specs/index.md` | `framework/app` importing `service`/`infra` without `service`/`infra` kind → opt-in violation (`core.IsOptIn`) |
+| 4 | Spec traceability | `ls docs/specs/` vs `docs/specs/` | New feature without spec in `docs/specs/` + requirement row (`FRK-*`) → blocker; original `docs/specs/` contains specs not `MOVED.md` → blocker |
 | 5 | Single config | `ls ssg.yaml` | Presence of `ssg.yaml` → violation (`core.ValidateKrewireYamlPath`) |
 | 6 | Module structure | `ls framework/` vs `framework/docs/architecture.md` | Missing `tui` (not `cli`), `runtime`/`worker`/`service`/`infra` layout drift → major |
 | 7 | Version compatibility | `core.ParseVersion` + `core.CheckEcosystemCompatibility` | `go.mod` requires violate `core.EcosystemVersions` → major |
@@ -34,7 +34,6 @@ Prevent architectural drift before it ships. This skill enforces the control pla
 ## 4. Gates
 
 - All 7 checks must be `Pass` before `reviewer` approves.
-- New `core.Kind` values require updating `core/workload.go` + `internal/docs/project-vision.md` + `.agents/context/vision-compact.md` atomically.
 
 ## Rules
 

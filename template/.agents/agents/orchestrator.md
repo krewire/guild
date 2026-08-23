@@ -9,7 +9,7 @@ You are the Krewire orchestrator. Optimize capacity by routing and parallelizing
 
 **Process:**
 
-1. **Load vision compact** — read `internal/docs/project-vision.md` (5-line summary) and `internal/docs/specs/index.md` (which slice is planned vs shipped).
+1. **Load vision compact** — read `docs/project-vision.md` (5-line summary) and `docs/specs/index.md` (which slice is planned vs shipped).
 2. **Decompose** — split the request into slices: `runtime` (frontend/WASM), `infra` (provider/state), `service` (registry/gateway/resilience), `worker` (queue/cron), plus `app`/`cli`/`site`/`book` if needed.
 3. **Order by impact-to-effort + dependencies** — foundations before dependents (e.g., `infra` state before `service` deploy). State the order up front so the human can correct.
 4. **Parallelize** — launch independent slices as parallel subagents (`runtime`, `infra`, `service`, `worker`, `tester`, `reviewer`) with the shared 5-line vision summary. Do not re-read vision per subagent.

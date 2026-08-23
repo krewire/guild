@@ -9,7 +9,7 @@ Background work with durable queues. This skill covers `framework/worker` (spec 
 
 ## 1. Detect the context
 
-- Read `internal/docs/project-vision.md` and `internal/docs/specs/framework/KWF-SVC-L5H2F-microservice-patterns.md` (§ worker).
+- Read `docs/project-vision.md` and `docs/specs/framework/KWF-SVC-L5H2F-microservice-patterns.md` (§ worker).
 - Check `project.kind: worker` or `worker:` in `krewire.yaml`; `framework/worker` may be used inside `app` as well.
 
 ## 2. Job & queue contract

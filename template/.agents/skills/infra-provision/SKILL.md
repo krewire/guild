@@ -9,7 +9,7 @@ Provision and deploy from `krewire.yaml`/`infra:` declarations. This skill cover
 
 ## 1. Detect the context
 
-- Read `internal/docs/project-vision.md` and `internal/docs/specs/framework/KWF-INFRA-B7N3D-cloud-provider-abstraction.md`.
+- Read `docs/project-vision.md` and `docs/specs/framework/KWF-INFRA-B7N3D-cloud-provider-abstraction.md`.
 - Identify provider (`aws`/`k8s`), state backend (local `.krewire/state.json` vs S3/GCS + DynamoDB/Consul locking), and resources needed (`Compute`, `Database`, `Storage`, `Network`, `DNS`, `Certificate`, `SecretRef`).
 
 ## 2. Provider contract

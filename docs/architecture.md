@@ -12,7 +12,6 @@ guild/
 │       ├── agents/       # 15 agents: build, plan, orchestrator, scout, tester, runtime, infra, service, worker, ...
 │       ├── commands/     # 16 commands: kickoff, vision, runtime, infra, service, worker, new-project, ...
 │       ├── skills/       # 20 skills: vision, wasm-runtime, infra-provision, service-mesh, worker-queue, ...
-│       └── context/      # vision-compact.md (5-line fast-load)
 └── docs/
 ```
 
@@ -25,6 +24,6 @@ guild/
 
 ## Conventions
 
-- Documentation in English, Markdown, spec-driven (`internal/docs/specs/guild/` in `krewire/internal`).
+- Documentation in English, Markdown, spec-driven (`docs/specs/`).
 - Quality gates: `gofmt -l .`, `go vet ./...`, `go test ./...` in each Go repo; per-kind `krewire build` / `krewire build --plan` spot-checks.
 - Cross-repo testing via temporary `replace` in `go.mod`; never `go.work`.

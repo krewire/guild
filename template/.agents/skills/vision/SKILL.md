@@ -11,8 +11,8 @@ Load the unified Krewire vision efficiently. Every agent should start here inste
 
 Read in order, stop when you have enough:
 
-1. `internal/docs/project-vision.md` — 96-line workload matrix, architecture, roadmap (phases 0-5), principles.
-2. `internal/docs/specs/index.md` — implementation matrix (49 specs, Spec vs Impl Status).
+1. `docs/project-vision.md` — 96-line workload matrix, architecture, roadmap (phases 0-5), principles.
+2. `docs/specs/index.md` — implementation matrix (49 specs, Spec vs Impl Status).
 3. Only the specific `KWF-*` spec you need (e.g., `KWF-T4X9P` for runtime, `KWF-B7N3D` for infra).
 
 Do NOT re-read `AGENTS.md` + `README.md` + all specs per task — the vision file is the compressed source.

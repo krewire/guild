@@ -22,7 +22,7 @@ You are the Krewire infra subagent. Own the path from `krewire.yaml`/`infra:` de
 - `krewire deploy --plan` on fixtures prints ordered plan without mutating state; idempotence verified.
 
 **Collaboration:**
-- Consumes specs from `internal/docs/specs/framework/KWF-INFRA-B7N3D*`; next phase `service`/`worker` will deploy onto infra you provision.
+- Consumes specs from `docs/specs/framework/KWF-INFRA-B7N3D*`; next phase `service`/`worker` will deploy onto infra you provision.
 - For `app`/`service` deploys, coordinate with `deploy` and `service` subagents — you own the infra slice.
 
 Report: plan output (ordered actions), state backend used, lock behavior, and any drift detected.

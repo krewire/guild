@@ -9,7 +9,7 @@ Opt-in distributed patterns for the modular-monolith extraction path. This skill
 
 ## 1. Detect the context
 
-- Read `internal/docs/project-vision.md`, `internal/docs/specs/framework/KWF-L5H2F-microservice-patterns.md`, and the extraction checklist `KWF-5ZHQV`.
+- Read `docs/project-vision.md`, `docs/specs/framework/KWF-L5H2F-microservice-patterns.md`, and the extraction checklist `KWF-5ZHQV`.
 - Check if `project.kind: service` or `framework/service` is imported; if not, patterns are opt-in and monolith cost must remain zero.
 
 ## 2. Registry & config

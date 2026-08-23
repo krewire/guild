@@ -50,7 +50,7 @@ Link to `docs/philosophy.md` for principles.
 
 ## Specifications
 
-Link to `internal/docs/specs/<project>/index.md` (central) — note `docs/specs/` is `MOVED.md` redirect.
+Link to `docs/specs/index.md` (central) — note `docs/specs/` is `MOVED.md` redirect.
 
 ## Related Repositories
 
@@ -95,7 +95,7 @@ docs (book) → mdbind → framework → libs
 
 ## Conventions
 
-- English, Markdown, spec-driven (`internal/docs/specs/<project>/` in `krewire/internal`).
+- English, Markdown, spec-driven (`docs/specs/` in `krewire/internal`).
 - Quality gates: `gofmt -l .`, `go vet ./...`, `go test ./...` + per-kind `krewire build` spot-checks.
 ```
 
@@ -119,7 +119,7 @@ docs (book) → mdbind → framework → libs
 
 ## Contribution
 
-- Read `internal/docs/project-vision.md` and `internal/docs/specs/<project>/index.md` before changing behavior.
+- Read `docs/project-vision.md` and `docs/specs/index.md` before changing behavior.
 - Keep suite green; update `README.md`/`docs/` when public behavior changes.
 ```
 
@@ -136,12 +136,12 @@ docs (book) → mdbind → framework → libs
 
 - [Architecture](./architecture.md) — module structure, design decisions, dependency graph
 - [Philosophy](./philosophy.md) — principles and contribution guidance
-- [Specifications](./specs/index.md) — formal specs (centralized in `krewire/internal` at `docs/specs/<repo>/`; local `specs/` are redirects — see `specs/MOVED.md`)
+- [Specifications](./specs/index.md) — formal specs ( in `krewire/internal` at `docs/specs/<repo>/`; local `specs/` are redirects — see `specs/MOVED.md`)
 
 ## Getting Started
 
 - Read `README.md` for build/test instructions.
-- For unified matrix and roadmap, see `internal/docs/project-vision.md` (source spec `KWF-ARCH-M8K2Q`).
+- For unified matrix and roadmap, see `docs/project-vision.md` (source spec `KWF-ARCH-M8K2Q`).
 
 ## Conventions
 
@@ -181,7 +181,7 @@ go test ./...
 
 ## Next Steps
 
-- Link to next manuscript chapter or `internal/docs/project-vision.md` workload.
+- Link to next manuscript chapter or `docs/project-vision.md` workload.
 ```
 
 **Diátaxis:** Tutorials (learning-oriented), How-to guides (task-oriented), Reference (information-oriented), Explanation (understanding-oriented) — choose one per manuscript file.
@@ -192,12 +192,11 @@ go test ./...
 
 - **IEEE 830 / 1016:** Structure, traceability, and verification.
 - **Diátaxis:** Documentation system (tutorials, how-to, reference, explanation).
-- **Krewire specifics:** Workload matrix 9 rows, `framework/tui` not `framework/cli`, `tui.NewApp`, centralized specs.
+- **Krewire specifics:** Workload matrix 9 rows, `framework/tui` not `framework/cli`, `tui.NewApp`,  specs.
 
 ### Checklist Before Submitting Docs
 
-- [ ] Workload matrix 9 rows and `framework/tui` consistent across `project-vision.md`, `core/workload.go`, `vision-compact.md`, all `README.md`, `AGENTS.md`
-- [ ] Architecture tree matches `docs/architecture.md` module structure and `internal/docs/specs/index.md` Impl Status
+- [ ] Architecture tree matches `docs/architecture.md` module structure and `docs/specs/index.md` Impl Status
 - [ ] Philosophy mentions `core` declarative + `kern` imperative control plane
 - [ ] `sync-docs` reports `In-sync`
 ```

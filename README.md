@@ -9,10 +9,9 @@ The guild is distributed as a Go module (`github.com/krewire/guild`) whose templ
 ## Features
 
 - **Unified constitution** — `template/AGENTS.md` encodes the 8-kind detection table, the complete `krewire` command matrix (`build`/`serve`/`run`/`dev`/`worker`/`deploy`/`dashboard`/`generate`), spec conventions, and quality gates; projects add their own rules under "Project-Specific Customization".
-- **Agents & subagents (15)** in `.agents/agents/` — `build` (orchestrator), `plan` (vision-aware), `orchestrator` (parallel router), `scout` (8-kind), `reviewer` (vision-aware), `tester` (per-kind), `debugger`, `refactor`, `docs` (centralized specs), `security` (secrets/WASM/mTLS-aware), `deploy` (unified), `runtime` (Go→WASM), `infra` (AWS/K8s), `service` (microservice), `worker` (queues).
+- **Agents & subagents (15)** in `.agents/agents/` — `build` (orchestrator), `plan` (vision-aware), `orchestrator` (parallel router), `scout` (8-kind), `reviewer` (vision-aware), `tester` (per-kind), `debugger`, `refactor`, `docs` ( specs), `security` (secrets/WASM/mTLS-aware), `deploy` (unified), `runtime` (Go→WASM), `infra` (AWS/K8s), `service` (microservice), `worker` (queues).
 - **Slash commands (16)** in `.agents/commands/` — `/kickoff`, `/new-project` (8 variants), `/vision` (workload matrix), `/runtime`, `/infra`, `/service`, `/worker`, `/review`, `/test`, `/fix`, `/commit`, `/spec`, `/refactor`, `/deploy` (unified), `/release`, `/triage`.
 - **Skills (20)** in `.agents/skills/` — `vision` (shared loader), `context-awareness` (4-layer situational intelligence), `agent-workflow` (handoff & lifecycle), `project-init`, `kickoff`, `requirement-gathering`, `spec-writing`, `test-driving`, `quality-gate` (vision-aware), `ci-cd` (8-kind), `release`, `bug-triage`, `conventional-commit`, `security-review`, `dependency-audit`, plus unified-workload skills `wasm-runtime` (`KWF-T4X9P`), `infra-provision` (`KWF-B7N3D`), `service-mesh` (`KWF-L5H2F`), `worker-queue` (`KWF-L5H2F`), `agent-optimization` (context compaction & parallel orchestration).
-- **Optimized context** — `.agents/context/vision-compact.md` (5-line matrix) for fast-load, lazy spec loading, parallel subagent orchestration; saves 60-80% tokens per task.
 - **opencode.json** — base opencode configuration (included).
 - **Go module** — template shipped as an `embed.FS` with a typed install library.
 - **docs/** — conventions, workflow, and a spec template.
@@ -62,7 +61,6 @@ Then, in your project:
 │       ├── agents/             # 15 agents (build, plan, orchestrator, scout, tester, ...)
 │       ├── commands/           # 16 commands (kickoff, vision, runtime, infra, service, worker, ...)
 │       ├── skills/             # 20 skills (vision, context-awareness, agent-workflow, wasm-runtime, ...)
-│       └── context/            # Shared compact vision (vision-compact.md)
 └── docs/
     ├── conventions.md          # Cross-language coding & repo conventions
     ├── workflow.md             # Agent workflow

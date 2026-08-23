@@ -11,13 +11,12 @@ Produce documentation that is accurate, concise, and in sync with the unified 9-
 
 Changes flow top-down. Never update upstream to match downstream.
 
-1. `internal/docs/project-vision.md` — workload matrix, roadmap
-2. `internal/docs/specs/index.md` — implementation matrix
+1. `docs/project-vision.md` — workload matrix, roadmap
+2. `docs/specs/index.md` — implementation matrix
 3. `libs/core/workload.go` — `core.Kind`/`Workloads` (code)
 4. Per-repo `docs/architecture.md` / `docs/philosophy.md` / `docs/index.md`
 5. `README.md` per repo
 6. `docs/manuscript/` (narrative)
-7. `AGENTS.md` / `.agents/context/vision-compact.md`
 
 ## 2. When to Use
 
@@ -30,7 +29,6 @@ Changes flow top-down. Never update upstream to match downstream.
 1. **Read upstream first** — `project-vision.md` + `specs/index.md` + `core/workload.go` to get canonical names (`framework/tui` not `framework/cli`).
 2. **Use the template** — `rules/doc-template.md` (global standard, IEEE 830 + Diátaxis) for the doc type you write (README / architecture / philosophy / manuscript / spec).
 3. **Be concise** — say what it is, why it exists, how to use it. No fluff. Keep workload matrix to 9 rows, architecture tree to one page.
-4. **Sync downstream** — after upstream change, update all downstream docs atomically: `docs/architecture.md` → `README.md` → `manuscript/` → `AGENTS.md` → `vision-compact.md`.
 5. **Verify** — run `sync-docs` subagent; it must report `In-sync` before done.
 
 ## 4. Doc Types & Templates

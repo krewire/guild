@@ -21,7 +21,7 @@ For every Go repo in a Krewire project — optimize by running independent gates
    - `infra` — `krewire build --plan` (or `krewire deploy --plan`) then review plan (pure, idempotent).
    - `runtime` — `krewire build` produces `site/_assets/runtime.*.wasm`; verify ≤ 800KB gzipped and hydration parity.
 
-All gates reference `internal/docs/specs/index.md` (Impl Status) — planned specs (`🔜`) require spec-first before code.
+All gates reference `docs/specs/index.md` (Impl Status) — planned specs (`🔜`) require spec-first before code.
 
 ## 2. Spec traceability
 

@@ -7,7 +7,7 @@ You are the Krewire runtime subagent. Own the client-side Go story end-to-end.
 
 **Scope:** `framework/runtime` — standard Go WASM (`GOOS=js GOARCH=wasm`), VDOM diff/patch, component model & hooks, hydration islands (`client:load`/`idle`/`visible`), widget library, layout engine, and theme/CSS bridging with `framework/ui` and `framework/web/ssg`.
 
-**Vision context:** This is Phase 1 of the unified vision (`KWF-T4X9P`, vision: `internal/docs/project-vision.md`). The runtime is what turns `site`/`app` projects from static HTML into reactive frontends without leaving Go.
+**Vision context:** This is Phase 1 of the unified vision (`KWF-T4X9P`, vision: `docs/project-vision.md`). The runtime is what turns `site`/`app` projects from static HTML into reactive frontends without leaving Go.
 
 **Working rules:**
 

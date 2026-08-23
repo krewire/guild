@@ -36,7 +36,7 @@ Title is searchable and follows Conventional Commits. No period at end.
 | **Type** | `Feature` | `Bug` | `Task` | `Spec` | `Architecture Guard` |
 | **Workload & Kind** | `framework/tui` (`cli` kind) / `framework/runtime` (`site`/`app`) / `framework/worker` / `framework/service` / `framework/infra` / `libs/core` / `libs/kern` / `krewire` / `guild` / `docs` / `internal` |
 | **Priority** | `P0` (blocker) / `P1` (high) / `P2` (medium) / `P3` (low) — sort by impact-to-effort first, then dependency chain |
-| **Spec** | `internal/docs/specs/<project>/` link or `SpecID` (e.g., `KWL-K1N2Q`) — `N/A` if bug without spec (but spec-first is preferred) |
+| **Spec** | `docs/specs/` link or `SpecID` (e.g., `KWL-K1N2Q`) — `N/A` if bug without spec (but spec-first is preferred) |
 | **Size** | `XS` (<1h) / `S` (half-day) / `M` (1-2d) / `L` (week) / `XL` (split) |
 | **Reporter** | `@username` + AI agent used (e.g., `arch-guard`, `sync-docs`) |
 
@@ -44,9 +44,8 @@ Title is searchable and follows Conventional Commits. No period at end.
 
 Why this matters now. One paragraph + links.
 
-- Link `internal/docs/project-vision.md` workload matrix and roadmap phase (0-5)
-- Link relevant spec `file:line` (e.g., `internal/docs/specs/libs/KWL-K1N2Q-core-business-rules.md:42`)
-- Link `AGENTS.md` or `.agents/context/vision-compact.md` if it defines the invariant being violated
+- Link `docs/project-vision.md` workload matrix and roadmap phase (0-5)
+- Link relevant spec `file:line` (e.g., `docs/specs/libs/KWL-K1N2Q-core-business-rules.md:42`)
 - For `arch-guard` / `sync-docs` findings: cite the guard check that failed
 
 ## 4. Problem Statement
@@ -55,7 +54,7 @@ Concrete, verifiable, file:line-grounded.
 
 ### For Features / Specs
 - Who is affected (CLI user, `app` developer, `infra` operator, AI agent)?
-- What is blocked or missing (cite `core.Workloads` or `internal/docs/specs/index.md` Impl Status `🔜 Planned`)?
+- What is blocked or missing (cite `core.Workloads` or `docs/specs/index.md` Impl Status `🔜 Planned`)?
 - What happens if not solved (debt, drift, blocked workload)?
 
 ### For Bugs
@@ -70,10 +69,9 @@ Concrete, verifiable, file:line-grounded.
 Ordered, small, verifiable steps. Each step is a file or command.
 
 ```markdown
-1. Write spec `internal/docs/specs/<project>/KWL-XXX-*.md` with requirement rows `KWL-XXX-001` (spec-first)
+1. Write spec `docs/specs/KWL-XXX-*.md` with requirement rows `KWL-XXX-001` (spec-first)
 2. Implement `libs/core/workload.go` — add `KindX` + `WorkloadFor` (tdd: `TestKindX`)
 3. Update `framework/docs/architecture.md` tree and `README.md` workload matrix
-4. Sync `.agents/context/vision-compact.md` + `AGENTS.md` if kind matrix changes
 ```
 
 - List files to create / change / delete
@@ -95,7 +93,7 @@ Every criterion is a checkbox that is either pass or fail. Must include gates.
 - [ ] `go vet ./...` clean in owning repo
 - [ ] `go test ./...` passes (or `krewire test`) — list specific test file:line
 - [ ] Per-kind gate: `go build .` for `app`/`cli`/`worker`/`service`, `krewire build` for `site`/`book`, `krewire build --plan` for `infra`, hydration check for `runtime`
-- [ ] Docs updated: `README.md`, `docs/architecture.md`, `docs/philosophy.md`, `internal/docs/project-vision.md` if public behavior changes
+- [ ] Docs updated: `README.md`, `docs/architecture.md`, `docs/philosophy.md`, `docs/project-vision.md` if public behavior changes
 - [ ] `arch-guard` reports `Pass` (no `libs/core` importing `framework`, no `ssg.yaml`, etc.)
 - [ ] `sync-docs` reports `In-sync` (workload matrix, `framework/tui` not `framework/cli`)
 - [ ] No `go.work`, no committed `replace` directives, no secrets committed
@@ -118,14 +116,14 @@ Every criterion is a checkbox that is either pass or fail. Must include gates.
 
 ## 9. Dependencies & Impact
 
-- **Depends On:** Specs that must land first (see `internal/docs/specs/index.md` Depends On)
+- **Depends On:** Specs that must land first (see `docs/specs/index.md` Depends On)
 - **Impacts:** Repos, packages, docs touched
 - **Migration:** Steps for adopters, `MOVED.md` redirects if moving files
 
 ## 10. References
 
-- Spec: `internal/docs/specs/<project>/...`
-- Vision: `internal/docs/project-vision.md`
+- Spec: `docs/specs/...`
+- Vision: `docs/project-vision.md`
 - Code: `libs/core/core.go:line`, `libs/kern/kern.go:line`
 - Related issue/PR: `#...`
 - External: RFC 2119, semver, etc.
@@ -136,8 +134,7 @@ Every criterion is a checkbox that is either pass or fail. Must include gates.
 
 ```yaml
 context:
-  - load: .agents/context/vision-compact.md  # 5-line matrix, not full docs
-  - load: internal/docs/specs/index.md       # check Spec vs Impl Status
+  - load: docs/specs/index.md       # check Spec vs Impl Status
   - load: specific KWF-*/KWL-* spec for this workload only (lazy)
 routing:
   - workload == "runtime" → agent: runtime, skill: wasm-runtime

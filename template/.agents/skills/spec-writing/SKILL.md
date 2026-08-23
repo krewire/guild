@@ -15,7 +15,7 @@ Produce clear, grounded design documents that guide implementation without over-
 
 ## Template (Global Industry Standard — Krewire Adaptation)
 
-Use `rules/spec-template.md` (this skill's template, IEEE 830 + RFC 2119 + Google Design Doc + ADR) as the single source. Copy it to `internal/docs/specs/<project>/` as `{ProjectId}-{Scope}-{SpecID}-{slug}.md`.
+Use `rules/spec-template.md` (this skill's template, IEEE 830 + RFC 2119 + Google Design Doc + ADR) as the single source. Copy it to `docs/specs/` as `{ProjectId}-{Scope}-{SpecID}-{slug}.md`.
 
 The template is optimized for both human review and AI implementation: every section has a purpose, RFC 2119 keywords, and a checklist. See `rules/spec-template.md` for the full 14-section structure and `rules/issue-template.md` (in `issue-writing` skill) for the paired GitHub issue.
 

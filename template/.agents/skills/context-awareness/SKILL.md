@@ -17,13 +17,12 @@ Load in order, stop when sufficient:
 - **Toolchain** — use `scout` subagent (read-only) to map without side effects.
 
 ### Layer 2 — Vision Context (what ecosystem?)
-- **Compact vision** — `.agents/context/vision-compact.md` (5 lines, 60% token saving) before full `internal/docs/project-vision.md` (96 lines).
-- **Workload matrix** — 9 workloads, 8 kinds, opt-in batteries (monolith zero-cost). Know which slice is `✅ Shipped` vs `🔜 Planned` via `internal/docs/specs/index.md`.
+- **Workload matrix** — 9 workloads, 8 kinds, opt-in batteries (monolith zero-cost). Know which slice is `✅ Shipped` vs `🔜 Planned` via `docs/specs/index.md`.
 - **Phase awareness** — Phase 1 WASM (`KWF-T4X9P`), Phase 2 infra (`KWF-B7N3D`), Phase 3 service/worker (`KWF-L5H2F`). Planned specs are spec-first.
 
 ### Layer 3 — Historical Context (what changed?)
 - **Git history** — `git log --oneline -10` or `git log -1 -- <path>` for docs; revision lives in git, not in-file `Version`.
-- **Spec history** — `internal/docs/specs/<project>/` is centralized in `krewire/internal`; original `<project>/docs/specs/` are redirects (`MOVED.md`).
+- **Spec history** — `docs/specs/` is  in `krewire/internal`; original `<project>/docs/specs/` are redirects (`MOVED.md`).
 - **Stale detection** — if `AGENTS.md` mentions 5 kinds or `ssg.yaml`, context is stale → reload vision.
 
 ### Layer 4 — Environment Context (what can I run?)
@@ -48,15 +47,14 @@ Never load all specs per task. Lazy-load the one `KWF-*` you touch after checkin
 ## 4. Anti-Patterns
 
 - Assuming `app` when `worker:`/`service:`/`infra:` exists.
-- Using per-repo `docs/specs/` instead of centralized `internal/docs/specs/`.
+- Using per-repo `docs/specs/` instead of  `docs/specs/`.
 - Invoking `krewire build` without `krewire info` kind check.
 - Treating `gh-pages` branch as source for `manuscript/` edits.
 
 ## 5. Quick Checklist
 
 - [ ] `krewire.yaml` + `krewire info` read; kind identified among 8
-- [ ] `vision-compact.md` loaded; workload matrix known
-- [ ] `internal/docs/specs/index.md` checked for Spec vs Impl status
+- [ ] `docs/specs/index.md` checked for Spec vs Impl status
 - [ ] Git log checked for recent changes to touched area
 - [ ] Environment (`go version`, `bin/krewire`) verified if running gates
 

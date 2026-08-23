@@ -9,10 +9,9 @@ Systematically optimize how agents consume context and execute work for the 8-ki
 
 ## 1. Context Compaction (save 60-80% tokens)
 
-- **Load compact first:** `.agents/context/vision-compact.md` (5 lines) instead of `internal/docs/project-vision.md` (96 lines) + `AGENTS.md` (300 lines) per subagent. Only the orchestrator loads full vision.
 - **Summarize, don't paste:** When delegating to `runtime`/`infra`/`service`/`worker`, pass a 5-line vision summary + the single `KWF-*` spec ID, not full docs.
-- **Lazy load specs:** Only `Read` the detailed `KWF-T4X9P`/`B7N3D`/`L5H2F` when the slice touches it. Use `internal/docs/specs/index.md` to check `Planned` vs `Shipped` before loading.
-- **Cache spec index:** `internal/docs/specs/index.md` is the single source for dependency ordering — read once, reuse across subagents.
+- **Lazy load specs:** Only `Read` the detailed `KWF-T4X9P`/`B7N3D`/`L5H2F` when the slice touches it. Use `docs/specs/index.md` to check `Planned` vs `Shipped` before loading.
+- **Cache spec index:** `docs/specs/index.md` is the single source for dependency ordering — read once, reuse across subagents.
 
 ## 2. Parallel Orchestration (2-4x speedup)
 

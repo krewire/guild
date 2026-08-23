@@ -20,9 +20,9 @@ Requirement → Spec (Draft→Approved) → Plan (impact-to-effort) → Implemen
 ### 2.1 Requirement → Spec (Spec-First)
 - Run `requirement-gathering` skill to clarify user story, acceptance criteria, workload kind.
 - Write spec using `spec-writing` skill with `rules/spec-template.md` (global standard).
-- One spec per initiative: `{ProjectId}-{Scope}-{SpecID}-{slug}.md` in `internal/docs/specs/<project>/`.
+- One spec per initiative: `{ProjectId}-{Scope}-{SpecID}-{slug}.md` in `docs/specs/`.
 - Requirement rows (`FRK-*`/`KWL-*`) use RFC 2119 `MUST`/`SHOULD` and trace to implementation.
-- Update `internal/docs/specs/<project>/index.md` and `internal/docs/specs/index.md` (Spec vs Impl Status).
+- Update `docs/specs/index.md` and `docs/specs/index.md` (Spec vs Impl Status).
 
 ### 2.2 Spec → Plan (Impact-to-Effort)
 - Run `plan` agent with `agent-workflow` + `vision` skills.
@@ -31,8 +31,6 @@ Requirement → Spec (Draft→Approved) → Plan (impact-to-effort) → Implemen
 
 ### 2.3 Plan → Implement (Slice Parallelism)
 - Decompose into independent slices: `runtime` (WASM), `infra` (provider), `service` (gateway/resilience), `worker` (queues), `tui` (CLI).
-- Delegate to specialized subagents (`runtime`/`infra`/`service`/`worker`) with `vision-compact.md` context (5-line matrix).
-- `build` orchestrates; parallelize independent slices (load `vision-compact.md`, not full docs).
 - Control plane: business rules in `libs/core` (`core.Kind`/`Workload`), execution in `libs/kern` (`Kernel`/`Supervisor`).
 
 ### 2.4 Implement → Verify (Gates + Traceability)

@@ -9,8 +9,8 @@ You are the docs synchronizer. Keep all Krewire documentation consistent with th
 
 **Source of truth hierarchy:**
 
-1. `internal/docs/project-vision.md` — 9-workload matrix, architecture diagram, roadmap
-2. `internal/docs/specs/index.md` — implementation matrix (49→51 specs, Spec vs Impl Status)
+1. `docs/project-vision.md` — 9-workload matrix, architecture diagram, roadmap
+2. `docs/specs/index.md` — implementation matrix (49→51 specs, Spec vs Impl Status)
 3. Per-repo `docs/architecture.md`, `docs/philosophy.md`, `docs/index.md` — must reflect (1) and (2)
 4. `README.md` per repo — workload table, ecosystem layout
 5. `manuscript/` (docs site) — narrative docs
@@ -18,19 +18,18 @@ You are the docs synchronizer. Keep all Krewire documentation consistent with th
 
 **Sync checks:**
 
-1. **Workload matrix drift** — `README.md` Workload Matrix, `internal/docs/project-vision.md` table, and `core.Workloads` must agree (9 rows, `framework/tui` not `framework/cli`, `tui` package).
+1. **Workload matrix drift** — `README.md` Workload Matrix, `docs/project-vision.md` table, and `core.Workloads` must agree (9 rows, `framework/tui` not `framework/cli`, `tui` package).
 
 2. **Architecture drift** — `framework/docs/architecture.md` module tree must include `tui` (not `cli`), `runtime`/`worker`/`service`/`infra` planned, `libs` must show `core` (business rules) + `kern` (executor) + `term`/`config`/`validate`. `krewire/docs/architecture.md` must show `tui` not `cli`.
 
 3. **Philosophy drift** — `docs/philosophy.md` per repo must mention declarative `core` + imperative `kern` control plane where relevant.
 
-4. **Spec location drift** — original `<project>/docs/specs/` must contain only `MOVED.md` + redirect `index.md`; actual specs must live in `internal/docs/specs/<project>/` with `internal/docs/specs/index.md` as master.
+4. **Spec location — specs live in `docs/specs/` of the owning repo.
 
-5. **Package name drift** — `framework/tui` must be used everywhere (`import "github.com/krewire/framework/tui"`), not `framework/cli`; `cli.` usages must be `tui.` in Go code. Check `internal/docs/specs/index.md` Impl Path column.
+5. **Package name drift** — `framework/tui` must be used everywhere (`import "github.com/krewire/framework/tui"`), not `framework/cli`; `cli.` usages must be `tui.` in Go code. Check `docs/specs/index.md` Impl Path column.
 
 6. **Manuscript drift** — `docs/manuscript/01-introduction.md` and `03-framework.md` must describe unified 9-workload vision, not old meta-framework phrasing.
 
-7. **Vision-compact freshness** — `.agents/context/vision-compact.md` must match `internal/docs/project-vision.md` 5-line summary.
 
 **Report format:**
 

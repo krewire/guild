@@ -30,7 +30,7 @@ Feature | Bug | Task | Spec | Architecture Guard
 framework/tui | framework/web | framework/tui | framework/runtime | framework/worker | framework/service | framework/infra | libs/core | libs/kern | krewire | guild | docs | internal
 
 ## Context
-Why now. Link `internal/docs/project-vision.md` and spec file:line (e.g., `internal/docs/specs/libs/KWL-K1N2Q-core-business-rules.md:42`).
+Why now. Link `docs/project-vision.md` and spec file:line (e.g., `docs/specs/libs/KWL-K1N2Q-core-business-rules.md:42`).
 
 ## Problem Statement
 Concrete problem with file:line or repro. For bugs: expected vs actual, `core.ExitCode` if relevant. For arch-guard: violation + impact.
@@ -46,8 +46,8 @@ Ordered small verifiable steps. For features: list files to create/change. For s
 - [ ] `sync-docs` reports In-sync, `arch-guard` reports Pass
 
 ## References
-- Spec: `internal/docs/specs/...`
-- Vision: `internal/docs/project-vision.md`
+- Spec: `docs/specs/...`
+- Vision: `docs/project-vision.md`
 - Related issue/PR: #...
 
 ## Labels
