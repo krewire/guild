@@ -76,7 +76,8 @@ project-specific `cmd/` binaries for build/serve/run.
   `public/` (embedded static assets).
 - **CLI layout** — `main.go` (tui.App harness) + `internal/commands/`.
 - **Site layout** — a `ssg:` key with `layouts`, `components`, `pages`; output
-  to `site/`; links normalized with trailing slashes (dir-based routing).
+  to `site/`; links extensionless, each page emitted as a sibling `.html`
+  file (file-based routing).
 - **Book layout** — `manuscript/` markdown chapters, assembled by mdbind.
 - **Worker layout** — `worker:` key in `krewire.yaml`, jobs under `internal/worker/`, queues via `framework/worker`.
 - **Service layout** — `service:` key, registry/config/gateway/resilience via `framework/service`; modular monolith default, opt-in extraction.
