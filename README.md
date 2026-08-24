@@ -1,17 +1,17 @@
 # Krewire Guild
 
-A guild of AI agents tuned for the **unified Krewire framework** — one install gives any Krewire project (covering all eight kinds: `app`, `cli`, `site`, `book`, `worker`, `service`, `infra`, `kernel`) a set of agents, commands, and skills that already know the ecosystem's conventions: the full `krewire` command matrix, `krewire.yaml`-only config, spec-driven development, and quality gates.
+A guild of AI agents tuned for the **unified Krewire framework** — one install gives any Krewire project (covering all eight kinds: `app`, `cli`, `site`, `book`, `worker`, `service`, `infra`, `kernel`) a set of agents, commands, and skills that already know the ecosystem's conventions: the full `kiw` command matrix, `krewire.yaml`-only config, spec-driven development, and quality gates.
 
-The guild is distributed as a Go module (`github.com/krewire/guild`) whose template is embedded and installed through the [krewire CLI](https://github.com/krewire/krewire).
+The guild is distributed as a Go module (`github.com/krewire/guild`) whose template is embedded and installed through the [`kiw` CLI](https://github.com/krewire/kiw).
 
 > Unified vision: [`KWF-M8K2Q`](../framework/docs/specs/KWF-ARCH-M8K2Q-unified-framework-vision.md)
 
 ## Features
 
-- **Unified constitution** — `template/AGENTS.md` encodes the 8-kind detection table, the complete `krewire` command matrix (`build`/`serve`/`run`/`dev`/`worker`/`deploy`/`dashboard`/`generate`), spec conventions, and quality gates; projects add their own rules under "Project-Specific Customization".
-- **Agents & subagents (15)** in `.agents/agents/` — `build` (orchestrator), `plan` (vision-aware), `orchestrator` (parallel router), `scout` (8-kind), `reviewer` (vision-aware), `tester` (per-kind), `debugger`, `refactor`, `docs` ( specs), `security` (secrets/WASM/mTLS-aware), `deploy` (unified), `runtime` (Go→WASM), `infra` (AWS/K8s), `service` (microservice), `worker` (queues).
+- **Unified constitution** — `template/AGENTS.md` encodes the 8-kind detection table, the complete `kiw` command matrix (`build`/`serve`/`run`/`dev`/`worker`/`deploy`/`dashboard`/`generate`), spec conventions, and quality gates; projects add their own rules under "Project-Specific Customization".
+- **Agents & subagents (20)** in `.agents/agents/` — `build` (orchestrator), `plan` (vision-aware), `orchestrator` (parallel router), `scout` (8-kind), `reviewer` (vision-aware), `tester` (per-kind), `debugger`, `refactor`, `docs` ( specs), `security` (secrets/WASM/mTLS-aware), `deploy` (unified), `runtime` (Go→WASM), `infra` (AWS/K8s), `service` (microservice), `worker` (queues).
 - **Slash commands (16)** in `.agents/commands/` — `/kickoff`, `/new-project` (8 variants), `/vision` (workload matrix), `/runtime`, `/infra`, `/service`, `/worker`, `/review`, `/test`, `/fix`, `/commit`, `/spec`, `/refactor`, `/deploy` (unified), `/release`, `/triage`.
-- **Skills (20)** in `.agents/skills/` — `vision` (shared loader), `context-awareness` (4-layer situational intelligence), `agent-workflow` (handoff & lifecycle), `project-init`, `kickoff`, `requirement-gathering`, `spec-writing`, `test-driving`, `quality-gate` (vision-aware), `ci-cd` (8-kind), `release`, `bug-triage`, `conventional-commit`, `security-review`, `dependency-audit`, plus unified-workload skills `wasm-runtime` (`KWF-T4X9P`), `infra-provision` (`KWF-B7N3D`), `service-mesh` (`KWF-L5H2F`), `worker-queue` (`KWF-L5H2F`), `agent-optimization` (context compaction & parallel orchestration).
+- **Skills (26)** in `.agents/skills/` — `vision` (shared loader), `context-awareness` (4-layer situational intelligence), `agent-workflow` (handoff & lifecycle), `project-init`, `kickoff`, `requirement-gathering`, `spec-writing`, `test-driving`, `quality-gate` (vision-aware), `ci-cd` (8-kind), `release`, `bug-triage`, `conventional-commit`, `security-review`, `dependency-audit`, plus unified-workload skills `wasm-runtime` (`KWF-T4X9P`), `infra-provision` (`KWF-B7N3D`), `service-mesh` (`KWF-L5H2F`), `worker-queue` (`KWF-L5H2F`), `agent-optimization` (context compaction & parallel orchestration).
 - **opencode.json** — base opencode configuration (included).
 - **Go module** — template shipped as an `embed.FS` with a typed install library.
 - **docs/** — conventions, workflow, and a spec template.
@@ -26,17 +26,17 @@ The guild is distributed as a Go module (`github.com/krewire/guild`) whose templ
 
 ## Quickstart
 
-Install into a target project with the krewire CLI:
+Install into a target project with the kiw CLI:
 
 ```bash
-krewire guild install /path/to/your/project
+kiw guild install /path/to/your/project
 ```
 
 With no target, an interactive wizard asks where to install and confirms before
 overwriting existing managed files:
 
 ```bash
-krewire guild install
+kiw guild install
 ```
 
 Options: `--force` (overwrite without prompting) and `--dry-run` (preview
@@ -45,7 +45,7 @@ without writing).
 Then, in your project:
 
 1. Open OpenCode in the project directory.
-2. Run `/kickoff` so the agent maps the project kind (`app`/`cli`/`site`/`book`/`worker`/`service`/`infra`/`kernel`), its `krewire` workflow, structure, and conventions.
+2. Run `/kickoff` so the agent maps the project kind (`app`/`cli`/`site`/`book`/`worker`/`service`/`infra`/`kernel`), its `kiw` workflow, structure, and conventions.
 3. Start working — the agent already knows how to think and work in your project.
 
 ## Structure
@@ -62,9 +62,13 @@ Then, in your project:
 │       ├── commands/           # 16 commands (kickoff, vision, runtime, infra, service, worker, ...)
 │       ├── skills/             # 20 skills (vision, context-awareness, agent-workflow, wasm-runtime, ...)
 └── docs/
-    ├── conventions.md          # Cross-language coding & repo conventions
-    ├── workflow.md             # Agent workflow
-    └── specs/                  # Specs (KWG-*) & template
+    ├── index.md               # Documentation index
+    ├── architecture.md        # Module structure & design decisions
+    ├── philosophy.md          # Principles & contribution guidance
+    ├── conventions.md         # Cross-language coding & repo conventions
+    ├── workflow.md            # End-to-end agent workflow
+    ├── sdlc.md                # SDLC phase coverage
+    └── specs/                 # Specs (KWG-*) & template
 ```
 
 ## Using as a Library
@@ -86,7 +90,7 @@ This template supports two workflows:
 
 **Single project** — Install directly into your project root:
 ```bash
-krewire guild install /path/to/your/project
+kiw guild install /path/to/your/project
 ```
 
 **Multi-project workspace** — Create a workspace directory with multiple projects (you choose the layout):

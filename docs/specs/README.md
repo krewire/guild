@@ -7,7 +7,11 @@ anything non-trivial, following `spec-template.md`.
 
 - [KWG-INSTALL-P9ZT4-guild-module-install](./KWG-INSTALL-P9ZT4-guild-module-install.md) — Guild
   Module & Install Library.
-- (add specs here as they are written; keep the list sorted by impact-to-effort, then dependency chain)
+- [KWG-ECO-K2N7Q-krewire-native-guild-template](./KWG-ECO-K2N7Q-krewire-native-guild-template.md) —
+  Krewire-Native Guild Template.
+
+The authoritative index with statuses is [`index.md`](./index.md); new specs are
+added to both lists when written.
 
 ## Naming
 

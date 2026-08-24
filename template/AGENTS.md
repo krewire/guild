@@ -2,7 +2,7 @@
 
 This document is the primary operating ruleset for the AI agent in projects
 that install this template. It is tuned for the **Krewire ecosystem** (Go
-projects driven by the `krewire` CLI). If the current project is not a Krewire
+projects driven by the `kiw` CLI). If the current project is not a Krewire
 project, follow the generic principles below and skip the Krewire-specific
 sections marked *Krewire*.
 
@@ -26,44 +26,44 @@ in before doing anything:
 
 | Kind      | Detection                                                   | Driven by                              |
 | --------- | ----------------------------------------------------------- | -------------------------------------- |
-| `app`     | `project.kind: app` or a root `main.go` (fullstack monolith)| `krewire run`, `krewire dev`             |
-| `cli`     | `project.kind: cli`                                         | `krewire run <args...>`                 |
-| `site`    | `project.kind: site` or an `ssg:` key in `krewire.yaml`     | `krewire build`, `krewire serve`         |
-| `book`    | `project.kind: book` or a `manuscript/` directory            | `krewire build`, `krewire serve`         |
-| `worker`  | `project.kind: worker` (job queues, cron, retries)          | `krewire run`, `krewire worker`, `krewire dev` |
-| `service` | `project.kind: service` (microservice)                      | `krewire run`, `krewire dev`             |
-| `infra`   | `project.kind: infra` (cloud IaC)                           | `krewire deploy`, `krewire build --plan` |
-| kernel    | only `go.mod`, `krewire.yaml`, `main.go`, `.gitignore` (pre-`init`) | `krewire init` |
+| `app`     | `project.kind: app` or a root `main.go` (fullstack monolith)| `kiw run`, `kiw dev`             |
+| `cli`     | `project.kind: cli`                                         | `kiw run <args...>`                 |
+| `site`    | `project.kind: site` or an `ssg:` key in `krewire.yaml`     | `kiw build`, `kiw serve`         |
+| `book`    | `project.kind: book` or a `manuscript/` directory            | `kiw build`, `kiw serve`         |
+| `worker`  | `project.kind: worker` (job queues, cron, retries)          | `kiw run`, `kiw worker`, `kiw dev` |
+| `service` | `project.kind: service` (microservice)                      | `kiw run`, `kiw dev`             |
+| `infra`   | `project.kind: infra` (cloud IaC)                           | `kiw deploy`, `kiw build --plan` |
+| kernel    | only `go.mod`, `krewire.yaml`, `main.go`, `.gitignore` (pre-`init`) | `kiw init` |
 
-Validate with `krewire info` (prints the detected kind). Never guess: read
+Validate with `kiw info` (prints the detected kind). Never guess: read
 `krewire.yaml` and check for `manuscript/` before deciding.
 See the unified vision: [`KWF-M8K2Q`](framework/docs/specs/KWF-ARCH-M8K2Q-unified-framework-vision.md).
 
-## The `krewire` Command Matrix (Krewire)
+## The `kiw` Command Matrix (Krewire)
 
-`krewire` is the single entry point for the whole ecosystem. Never invoke
+`kiw` is the single entry point for the whole ecosystem. Never invoke
 project-specific `cmd/` binaries for build/serve/run.
 
 | Command | Purpose | Works on |
 | ------- | ------- | -------- |
-| `krewire new <name>` | Scaffold a minimal kernel (go.mod, krewire.yaml, main.go, .gitignore) | any new project |
-| `krewire init` | Equip a kernel in place (default: fullstack app) | kernel |
-| `krewire init --static` | Equip a declarative static site (`ssg:` in krewire.yaml) | kernel |
-| `krewire init --book` | Equip a manuscript book (mdbind) | kernel |
-| `krewire init --cli` | Equip a command-line application (framework/tui) | kernel |
-| `krewire init --template <git-url>` | Clone a starter repository | empty dir |
-| `krewire build` | Build the project (binary for app/cli/worker/service, `site/` for site/book, plan for infra) | all |
-| `krewire serve` | Serve the built site over HTTP | site, book |
-| `krewire run [args...]` | Build and run the app/CLI/worker/service binary | app, cli, worker, service |
-| `krewire dev` | Rebuild + auto-restart on change (incl. WASM for frontend) | app, cli, worker, service |
-| `krewire worker` | Run background workers / job queues | worker |
-| `krewire deploy` | Provision infra + deploy (`--plan`, `--preview`, `--destroy`) | app, site, book, worker, service, infra |
-| `krewire dashboard` | Local dev dashboard (services, logs, traces, infra) | worker, service, infra |
-| `krewire generate` | Generate code (OpenAPI, config, etc.) | all |
-| `krewire test` | Run `go test ./...` of the current module | all |
-| `krewire info` | Print environment and detected project kind | all |
-| `krewire version` | Print CLI and framework versions | all |
-| `krewire guild install` | Install this template | any project |
+| `kiw new <name>` | Scaffold a minimal kernel (go.mod, krewire.yaml, main.go, .gitignore) | any new project |
+| `kiw init` | Equip a kernel in place (default: fullstack app) | kernel |
+| `kiw init --static` | Equip a declarative static site (`ssg:` in krewire.yaml) | kernel |
+| `kiw init --book` | Equip a manuscript book (mdbind) | kernel |
+| `kiw init --cli` | Equip a command-line application (framework/tui) | kernel |
+| `kiw init --template <git-url>` | Clone a starter repository | empty dir |
+| `kiw build` | Build the project (binary for app/cli/worker/service, `site/` for site/book, plan for infra) | all |
+| `kiw serve` | Serve the built site over HTTP | site, book |
+| `kiw run [args...]` | Build and run the app/CLI/worker/service binary | app, cli, worker, service |
+| `kiw dev` | Rebuild + auto-restart on change (incl. WASM for frontend) | app, cli, worker, service |
+| `kiw worker` | Run background workers / job queues | worker |
+| `kiw deploy` | Provision infra + deploy (`--plan`, `--preview`, `--destroy`) | app, site, book, worker, service, infra |
+| `kiw dashboard` | Local dev dashboard (services, logs, traces, infra) | worker, service, infra |
+| `kiw generate` | Generate code (OpenAPI, config, etc.) | all |
+| `kiw test` | Run `go test ./...` of the current module | all |
+| `kiw info` | Print environment and detected project kind | all |
+| `kiw version` | Print CLI and framework versions | all |
+| `kiw guild install` | Install this template | any project |
 
 ## Core Conventions (Krewire)
 
@@ -87,36 +87,38 @@ project-specific `cmd/` binaries for build/serve/run.
   (`libs/core.ExitCodeSuccess/Failure/Usage`).
 - **Control plane** — `libs/core` (declarative: business rules, workload registry) + `libs/kern` (imperative: `Kernel`/`Module`/`Registry`/`Executor`/`Supervisor`) are the ecosystem center; `framework` and `krewire` compose via `kern`.
 - **Modules** — `github.com/krewire/framework` (unified framework: `tui`, `web`+`ssg`, `ui`, `app`, `runtime`, `worker`, `service`, `infra`), `github.com/krewire/libs` (`core`+`kern`+`config`/`validate`/`term`), `github.com/krewire/mdbind`,
-  `github.com/krewire/guild`. Cross-repo testing uses temporary `replace`
-  directives in `go.mod` — never `go.work` with committed references.
+  `github.com/krewire/guild`. Cross-repo testing uses the hub `go.work`
+  workspace; temporary `replace` directives only for single-repo clones outside
+  the workspace.
 
-## Spec-Driven Development (Krewire)
+## Optional — The Krewire Way (Spec-Driven Development)
 
-- **Spec first.** Before any code, write a specification in `docs/specs/` of
-  the owning repo. New features get a requirement row with an ID
-  (e.g. `RND-BLD-001`, `FRK-SSG-010`).
-- **File name** `{ProjectId}-{Scope}-{SpecID}-{slug}.md`; SpecID is a unique
-  random 5-character code (do not reuse or sequence).
-- **Metadata table** — `SpecID`, `Title`, `Status`, `Date`, `Author`, `Domain`.
-  No `Version`, `Last updated`, or `Changes` fields.
-- **Revision history lives in git**, not in the file: verify changes with
-  `git log -1 -- <path>`.
-- Implementation software repos follow this order: framework → mdbind → krewire
-  → docs/landing, then `gofmt`/`go vet`/`go test`, then `push`+`tag` and
-  propagate the version to downstream `go.mod`.
+This template is project-agnostic and imposes no development methodology.
+Teams that like how the Krewire ecosystem itself is built may opt in to its
+spec-driven approach ("the Krewire way"):
+
+- Before building a complex feature, write a short specification in
+  `docs/specs/`: problem background, identified need, and requirement rows
+  with IDs (e.g. `APP-BLD-001`) and priorities (`Must`/`Should`).
+- File name `{ProjectId}-{Scope}-{SpecID}-{slug}.md`; SpecID is a unique
+  random 5-character code. Metadata table: `SpecID`, `Title`, `Status`,
+  `Date`, `Author`, `Domain`. Revision history lives in git, not in the file.
+
+Anything smaller can stay README-driven — adopt only what pays for itself.
 
 ## Workflow
 
 1. **Understand** the request. Ask if ambiguous — better to ask than to go the wrong way.
-2. **Plan** — for non-trivial tasks, make a short plan (this may use the `plan` agent or `/spec`).
+2. **Plan** — for non-trivial tasks, make a short plan (this may use the
+   `plan` agent, or a spec first for projects that adopted the Krewire way).
 3. **Implement** — make the smallest change following conventions.
 4. **Verify** — run the relevant tests/lint/build. Never finish a task without verification.
 5. **Summarize** — report what changed, why, and how it was verified.
 
 ## Mapping the Project
 
-Run `/kickoff` (or `krewire info`) when the project is unmapped. Record: detected
-kind, the `krewire` commands it needs, layout, and conventions. Don't make
+Run `/kickoff` (or `kiw info`) when the project is unmapped. Record: detected
+kind, the `kiw` commands it needs, layout, and conventions. Don't make
 another agent re-map from scratch.
 
 ## Edit Discipline
@@ -130,12 +132,12 @@ another agent re-map from scratch.
 
 - Krewire Go projects: `gofmt -l .`, `go vet ./...`, `go test ./...` in each repo.
 - Per-kind build gate — `app`/`cli`: `go build .`; `site`/`book`:
-  `krewire build` then spot-check the `site/` output.
+  `kiw build` then spot-check the `site/` output.
 - Run the real commands and record results; do not claim a gate passes without evidence.
 
 ## Testing
 
-- `krewire test` (Go: `go test ./...`). Find repo-local test patterns first.
+- `kiw test` (Go: `go test ./...`). Find repo-local test patterns first.
 - After changing behavior, add/update tests when the project's patterns expect it.
 - If tests fail, use the `debugger` agent for root-cause analysis instead of trying random fixes.
 
@@ -161,11 +163,11 @@ Before committing, check `git status`/`git diff` and never commit secrets.
 ## Documentation
 
 - Update README/docs when public behavior changes.
-- For complex features/design, write or update a spec in `docs/specs/` before implementing.
-- Follow the ecosystem spec conventions above.
+- For complex features/design, projects following the Krewire way capture the
+  design as a spec in `docs/specs/` before implementing.
 
 ## Project-Specific Customization
 
 Add rules specific to this project below here: agreed architecture, concrete
 naming conventions, specific test commands, compatibility targets, or the
-`krewire` commands this project needs. Keep them minimal and verifiable.
+`kiw` commands this project needs. Keep them minimal and verifiable.

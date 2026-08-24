@@ -6,7 +6,7 @@ Agent guide for AI agents working in the `github.com/krewire/guild` repository.
 
 - The installable template lives under `template/` and is embedded via
   `//go:embed all:template` in `guild.go`. It is the source of truth that
-  `krewire guild install` copies into target projects.
+  `kiw guild install` copies into target projects.
 - Do not mistake `template/AGENTS.md` for this file: that copy governs projects
   that install the template. This root `AGENTS.md` governs this repository.
 - Keep the module stdlib-only (no third-party imports) and preserve the GLD-IN
