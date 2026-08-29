@@ -1,7 +1,11 @@
 package guild
 
-// Version is the guild module version.
-const Version = "0.1.0"
+import "github.com/krewire/libs/core"
 
-// VersionString returns the version string.
-func VersionString() string { return Version }
+// Version is the guild module version.
+var Version = core.MustParseVersion("0.1.0")
+
+// EcosystemRequires declares the minimum versions of other modules this version is compatible with.
+var EcosystemRequires = map[core.ModuleName]core.Version{
+	core.ModuleLibs: core.MustParseVersion("0.1.0"),
+}
