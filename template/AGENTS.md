@@ -29,14 +29,14 @@ in before doing anything:
 | `app`     | `project.kind: app` or a root `main.go` (fullstack monolith)| `kiw run`, `kiw dev`             |
 | `cli`     | `project.kind: cli`                                         | `kiw run <args...>`                 |
 | `site`    | `project.kind: site` or an `ssg:` key in `krewire.yaml`     | `kiw build`, `kiw serve`         |
-| `book`    | `project.kind: book` or a `manuscript/` directory            | `kiw build`, `kiw serve`         |
+| `book`    | `project.kind: book` or a `content/` directory            | `kiw build`, `kiw serve`         |
 | `worker`  | `project.kind: worker` (job queues, cron, retries)          | `kiw run`, `kiw worker`, `kiw dev` |
 | `service` | `project.kind: service` (microservice)                      | `kiw run`, `kiw dev`             |
 | `infra`   | `project.kind: infra` (cloud IaC)                           | `kiw deploy`, `kiw build --plan` |
 | kernel    | only `go.mod`, `krewire.yaml`, `main.go`, `.gitignore` (pre-`init`) | `kiw init` |
 
 Validate with `kiw info` (prints the detected kind). Never guess: read
-`krewire.yaml` and check for `manuscript/` before deciding.
+`krewire.yaml` and check for `content/` before deciding.
 See the unified vision: [`KWF-M8K2Q`](framework/docs/specs/KWF-ARCH-M8K2Q-unified-framework-vision.md).
 
 ## The `kiw` Command Matrix (Krewire)
@@ -48,22 +48,26 @@ project-specific `cmd/` binaries for build/serve/run.
 | ------- | ------- | -------- |
 | `kiw new <name>` | Scaffold a minimal kernel (go.mod, krewire.yaml, main.go, .gitignore) | any new project |
 | `kiw init` | Equip a kernel in place (default: fullstack app) | kernel |
-| `kiw init --static` | Equip a declarative static site (`ssg:` in krewire.yaml) | kernel |
-| `kiw init --book` | Equip a manuscript book (mdbind) | kernel |
+| `kiw init --site` | Equip a declarative static site (`ssg:` in krewire.yaml) | kernel |
+| `kiw init --book` | Equip a markdown content book (mdbind) | kernel |
 | `kiw init --cli` | Equip a command-line application (framework/tui) | kernel |
 | `kiw init --template <git-url>` | Clone a starter repository | empty dir |
-| `kiw build` | Build the project (binary for app/cli/worker/service, `site/` for site/book, plan for infra) | all |
-| `kiw serve` | Serve the built site over HTTP | site, book |
+| `kiw build` | Build the project (binary for app/cli/worker/service, `.krewire/build` for site/book, plan for infra) | all |
+| `kiw serve` | Start the project locally for any kind: compile & listen (`app`), execute with args (`cli`), preview static output (`site`, `book`) | all |
 | `kiw run [args...]` | Build and run the app/CLI/worker/service binary | app, cli, worker, service |
 | `kiw dev` | Rebuild + auto-restart on change (incl. WASM for frontend) | app, cli, worker, service |
 | `kiw worker` | Run background workers / job queues | worker |
 | `kiw deploy` | Provision infra + deploy (`--plan`, `--preview`, `--destroy`) | app, site, book, worker, service, infra |
 | `kiw dashboard` | Local dev dashboard (services, logs, traces, infra) | worker, service, infra |
 | `kiw generate` | Generate code (OpenAPI, config, etc.) | all |
-| `kiw test` | Run `go test ./...` of the current module | all |
+| `kiw test` | Run `go test ./...` of the current module (spawn Go toolchain) | all |
+| `kiw vet` | Run `go vet ./...` of the current module (spawn Go toolchain) | all |
+| `kiw fmt` | Check/format with `gofmt -l` / `go fmt ./...` (spawn Go toolchain, `--write` to fix) | all |
 | `kiw info` | Print environment and detected project kind | all |
 | `kiw version` | Print CLI and framework versions | all |
 | `kiw guild install` | Install this template | any project |
+| `kiw help <command>` | Show help for a command | all |
+| `kiw <command> help` / `kiw <command> --help` / `kiw <command> -h` | Show help for a command (aliases) | all |
 
 ## Core Conventions (Krewire)
 
@@ -76,9 +80,12 @@ project-specific `cmd/` binaries for build/serve/run.
   `public/` (embedded static assets).
 - **CLI layout** — `main.go` (tui.App harness) + `internal/commands/`.
 - **Site layout** — a `ssg:` key with `layouts`, `components`, `pages`; output
-  to `site/`; links extensionless, each page emitted as a sibling `.html`
+  to `.krewire/build` (default, configurable via `output` in `krewire.yaml` or `--output`/`-o` flag); links extensionless, each page emitted as a sibling `.html`
   file (file-based routing).
-- **Book layout** — `manuscript/` markdown chapters, assembled by mdbind.
+- **Book layout** — `content/**/*.md` chapters (subdirectories become
+  chapters with subchapters), assembled by mdbind; `input` configurable in
+  `krewire.yaml` (legacy `manuscript/` still accepted); README/readme notes
+  are excluded by default, tunable via `build.include/exclude`.
 - **Worker layout** — `worker:` key in `krewire.yaml`, jobs under `internal/worker/`, queues via `framework/worker`.
 - **Service layout** — `service:` key, registry/config/gateway/resilience via `framework/service`; modular monolith default, opt-in extraction.
 - **Infra layout** — `infra:` key, provider-agnostic declarations under `infra/` compiled by `framework/infra` to AWS/Kubernetes.
@@ -86,7 +93,7 @@ project-specific `cmd/` binaries for build/serve/run.
   validated with `libs/validate` (`validate:"required"` tags) and business rules in `libs/core` (`Kind`/`Workload`/`SpecID`).
 - **Exit codes** — `0` success, `1` runtime failure, `2` usage error
   (`libs/core.ExitCodeSuccess/Failure/Usage`).
-- **Control plane** — `libs/core` (declarative: business rules, workload registry) + `libs/kern` (imperative: `Kernel`/`Module`/`Registry`/`Executor`/`Supervisor`) are the ecosystem center; `framework` and `krewire` compose via `kern`.
+- **Control plane** — `libs/core` (declarative: business rules, workload registry) + `libs/kern` (imperative: `Kernel`/`Module`/`Registry`/`Executor`/`Supervisor`) are the ecosystem center; `framework` and `kiw` compose via `kern`.
 - **Modules** — `github.com/krewire/framework` (unified framework: `tui`, `web`+`ssg`, `ui`, `app`, `runtime`, `worker`, `service`, `infra`), `github.com/krewire/libs` (`core`+`kern`+`config`/`validate`/`term`), `github.com/krewire/mdbind`,
   `github.com/krewire/guild`. Cross-repo testing uses the hub `go.work`
   workspace; temporary `replace` directives only for single-repo clones outside
@@ -133,7 +140,7 @@ another agent re-map from scratch.
 
 - Krewire Go projects: `gofmt -l .`, `go vet ./...`, `go test ./...` in each repo.
 - Per-kind build gate — `app`/`cli`: `go build .`; `site`/`book`:
-  `kiw build` then spot-check the `site/` output.
+  `kiw build` then spot-check the `.krewire/build` output.
 - Run the real commands and record results; do not claim a gate passes without evidence.
 
 ## Testing
